@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2018 at 08:04 AM
+-- Generation Time: May 23, 2018 at 09:18 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -30,11 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tree_location` (
   `id` int(11) NOT NULL,
+  `type` varchar(100) NOT NULL,
   `xcoord` float NOT NULL,
   `ycoord` float NOT NULL,
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tree_location`
+--
 
 --
 -- Indexes for dumped tables
@@ -54,7 +59,7 @@ ALTER TABLE `tree_location`
 -- AUTO_INCREMENT for table `tree_location`
 --
 ALTER TABLE `tree_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
