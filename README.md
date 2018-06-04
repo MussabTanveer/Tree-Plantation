@@ -8,7 +8,7 @@ http://jsfiddle.net/pSVXz/12/
 
 Steps to run:
 1. Dump trees.sql
-2. run http://localhost/Trees/index.php
+2. run http://localhost/TreePlantation/index.php
 
 Tasks Completed: 
 1. Place trees.
