@@ -68,6 +68,9 @@ if(mysqli_num_rows($result) > 0){
             </div>
         </div>
         <br>
+        <!-- Toggle images -->
+        <button class="btn btn-success" id="toggle" onclick="toggle();">Show Coordinates <span class="glyphicon glyphicon-eye-open"></span></button>
+        <br>
     </div>
     <br>
     
@@ -164,4 +167,20 @@ if(mysqli_num_rows($result) > 0){
         });
     });
     
+    // Toggle map images
+    var t = 0;
+    function toggle(){
+        if(t == 0)
+        {
+            document.getElementById("mapImg").src = "./images/campusMap2.jpg";
+            document.getElementById("toggle").innerHTML = 'Hide Coordinates <span class="glyphicon glyphicon-eye-close"></span>';
+            t = 1;
+        }
+        else
+        {
+            document.getElementById("mapImg").src = "./images/campusMap.jpg";
+            document.getElementById("toggle").innerHTML = 'Show Coordinates <span class="glyphicon glyphicon-eye-open"></span>';
+            t = 0;
+        }
+    }
 </script>
