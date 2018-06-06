@@ -1,13 +1,17 @@
 Sample plugins/demos:
 
 http://jsfiddle.net/rdpuxajo/2/
+
 https://www.tutorialrepublic.com/codelab.php?topic=faq&file=jquery-find-mouse-position-relative-to-an-element
+
 http://jsfiddle.net/pSVXz/12/
 
 An image-map, with clickable areas:
 
 https://www.w3schools.com/tags/tag_map.asp
+
 https://www.w3schools.com/TAgs/tag_area.asp
+
 https://www.w3schools.com/TAgs/att_area_coords.asp
 
 Steps to run:
