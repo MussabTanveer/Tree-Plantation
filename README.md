@@ -21,6 +21,7 @@ Tasks Completed:
 4. Select type of tree to place.
 5. Hover on tree shows person name, email and tree type.
 6. Form to take coordinates input of forbidden area.
+7. Store forbidden area data in database.
 
 Tasks need to be completed:
 1. Create an admin.
@@ -28,5 +29,4 @@ Tasks need to be completed:
 3. Admin can upload tree icons.
 4. Users login with username and password to place trees.
 5. Admin can remove any tree but user can only remove own tree.
-6. Store forbidden area data in database.
-7. Restrict area.
+6. Restrict area.
