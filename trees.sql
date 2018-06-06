@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2018 at 09:18 PM
+-- Generation Time: Jun 06, 2018 at 11:38 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -25,6 +25,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `forbidden_area`
+--
+
+CREATE TABLE `forbidden_area` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forbidden_coordinates`
+--
+
+CREATE TABLE `forbidden_coordinates` (
+  `id` int(11) NOT NULL,
+  `areaid` int(11) NOT NULL,
+  `xcoord` float NOT NULL,
+  `ycoord` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tree_location`
 --
 
@@ -38,12 +62,20 @@ CREATE TABLE `tree_location` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tree_location`
+-- Indexes for dumped tables
 --
 
 --
--- Indexes for dumped tables
+-- Indexes for table `forbidden_area`
 --
+ALTER TABLE `forbidden_area`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `forbidden_coordinates`
+--
+ALTER TABLE `forbidden_coordinates`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tree_location`
@@ -56,10 +88,20 @@ ALTER TABLE `tree_location`
 --
 
 --
+-- AUTO_INCREMENT for table `forbidden_area`
+--
+ALTER TABLE `forbidden_area`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `forbidden_coordinates`
+--
+ALTER TABLE `forbidden_coordinates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tree_location`
 --
 ALTER TABLE `tree_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
