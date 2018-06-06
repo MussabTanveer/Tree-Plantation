@@ -19,6 +19,35 @@ if(mysqli_num_rows($result) > 0){
 	}
 }
 
+// fetch all forbidden area records and store in arrays
+$sql = "SELECT * FROM forbidden_area";
+
+$result = mysqli_query($conn, $sql);
+$areaids = array(); $areanames = array();
+
+if(mysqli_num_rows($result) > 0){
+	while ($row = mysqli_fetch_array($result)) {
+		array_push($areaids, $row["id"]);
+        array_push($areanames, $row["name"]);
+    }
+    $allareacoords = array();
+    foreach($areaids as $x) {
+        $areacoords = array();
+        $sql = "SELECT * FROM forbidden_coordinates WHERE areaid = $x";
+        
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result)) {
+            array_push($areacoords, $row["xcoord"]);
+            array_push($areacoords, $row["ycoord"]);
+        }
+        array_push($allareacoords, $areacoords);
+    }
+}
+//print_r($areaids);echo "<br>";
+//print_r($areanames);echo "<br>";
+//print_r($allareacoords);echo "<br>";
+
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +63,7 @@ if(mysqli_num_rows($result) > 0){
     <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
     <style>
         .cell {cursor: cell;}
+        area {cursor: not-allowed;}
     </style>
 </head>
 <body>
@@ -44,18 +74,10 @@ if(mysqli_num_rows($result) > 0){
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required/>
             </div>
-            <!--<div class="form-group">
-                <label for="username"><b>Username:</b></label>
-                <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required/>
-            </div>-->
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required/>
             </div>
-            <!--<div class="form-group">
-                <label for="email"><b>Email:</b></label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required/>
-            </div>-->
             <div class="form-group">
                 <b>Select tree: </b>
                 <label class="radio-inline"><input type="radio" name="tree" value="pine"> <img class="marker" src="./images/pine-tree.png" title="pine tree" /></label>
@@ -74,8 +96,25 @@ if(mysqli_num_rows($result) > 0){
     </div>
     <br>
     
-    <!-- Image on which the trees going to be placed -->
-    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" />
+    <!-- Image on which the trees are going to be placed -->
+    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" />
+    
+    <!-- Restricted area -->
+    <map name="mapTree">
+        <?php
+        for($i=0; $i<count($areaids); $i++) {
+            ?><area shape="poly" 
+            coords="<?php
+            for($j=0; $j<count($allareacoords[$i]); $j++) {
+                echo $allareacoords[$i][$j].",";
+            }
+            ?>"
+            alt="<?php echo "$areanames[$i]"; ?>" title="<?php echo "$areanames[$i]"; ?>"
+            class="area">
+            <?php
+        }
+        ?>
+    </map>
 
     <p id="msg"></p>
 </body>
