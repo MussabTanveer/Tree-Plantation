@@ -17,6 +17,7 @@ https://www.w3schools.com/TAgs/att_area_coords.asp
 Steps to run:
 1. Dump trees.sql
 2. run http://localhost/TreePlantation/index.php
+2. run http://localhost/TreePlantation/forbidden_area.php
 
 Tasks Completed: 
 1. Place trees.
