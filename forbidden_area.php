@@ -39,9 +39,9 @@ if(mysqli_num_rows($result) > 0){
     <script src="./script/jquery/jquery-3.2.1.min.js"></script>
     <script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script>
-    if(performance.navigation.type == 2){
-    location.reload(true);
-    }
+        if(performance.navigation.type == 2){
+        location.reload(true);
+        }
     </script>
     <link rel="shortcut icon" href="./images/pine-tree.png" />
     <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
@@ -78,7 +78,9 @@ if(mysqli_num_rows($result) > 0){
                 echo $allareacoords[$i][$j].",";
             }
             ?>"
-            alt="<?php echo "$areanames[$i]"; ?>" title="Remove <?php echo "$areanames[$i]"; ?>" href='<?php echo "./remove_forbidden_area.php?area=$areaids[$i]" ?>'
+            alt="<?php echo "$areanames[$i]"; ?>"
+            title="Remove <?php echo "$areanames[$i]"; ?>"
+            href='<?php echo "./remove_forbidden_area.php?area=$areaids[$i]" ?>'
             class="area">
             <?php
         }
@@ -148,19 +150,6 @@ if(mysqli_num_rows($result) > 0){
             }
 
         });
-
-        /*$(".submitCoords").click(function (ev) {
-            var formdata = $("form").serialize();
-            $.ajax({
-                type : "POST",
-                url : "insert_forbidden_area.php",
-                data : {coords : coords},
-                dataType: 'JSON',
-                success : function(feedback){
-                    $("#msg").html(feedback);
-                }
-            });
-        });*/
     });
     
 </script>
