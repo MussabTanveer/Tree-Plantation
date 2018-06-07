@@ -184,7 +184,7 @@ if(mysqli_num_rows($result) > 0){
             var title = "Username: " + info[2] + ", Email: " + info[3] + ", Tree: " + info[4];
             
             // check whether user has filled all info in fields
-            if(info[2] && info[3] && info[4] && (info[0] < 546 || info[0] > 753 || info[1] < 775 || info[1] > 936) ) {
+            if(info[2] && info[3] && info[4]) {
                 $("body").append(
                     $('<img class="marker" src="'+src+'" />').css({
                     position: 'absolute',
