@@ -1,6 +1,32 @@
 <?php
 // connect to database
 require("connection.php");
+
+// fetch all previous forbidden area records and store in arrays
+$sql = "SELECT * FROM forbidden_area";
+
+$result = mysqli_query($conn, $sql);
+$areaids = array(); $areanames = array();
+
+if(mysqli_num_rows($result) > 0){
+	while ($row = mysqli_fetch_array($result)) {
+		array_push($areaids, $row["id"]);
+        array_push($areanames, $row["name"]);
+    }
+    $allareacoords = array();
+    foreach($areaids as $x) {
+        $areacoords = array();
+        $sql = "SELECT * FROM forbidden_coordinates WHERE areaid = $x";
+        
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result)) {
+            array_push($areacoords, $row["xcoord"]);
+            array_push($areacoords, $row["ycoord"]);
+        }
+        array_push($allareacoords, $areacoords);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,17 +38,24 @@ require("connection.php");
     <title>Tree Plantation</title>
     <script src="./script/jquery/jquery-3.2.1.min.js"></script>
     <script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    if(performance.navigation.type == 2){
+    location.reload(true);
+    }
+    </script>
     <link rel="shortcut icon" href="./images/pine-tree.png" />
     <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
     <style>
         .cell {cursor: crosshair;}
+        area {cursor: not-allowed;}
     </style>
 </head>
 <body>
     <br>
     <div class="container">
         <form id="coordForm" method="POST" action="insert_forbidden_area.php">
-            <button class="submitCoords btn btn-success">Submit Coordinates</button>
+            Coordinates: 
+            <button class="submitCoords btn btn-success btn-block">Submit Coordinates</button>
         </form>
         <br>
         <div>
@@ -33,7 +66,24 @@ require("connection.php");
     <br>
     
     <!-- Image on which the forbidden area going to be marked -->
-    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" />
+    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" />
+
+    <!-- Previously restricted area -->
+    <map name="mapTree">
+        <?php
+        for($i=0; $i<count($areaids); $i++) {
+            ?><area shape="poly" 
+            coords="<?php
+            for($j=0; $j<count($allareacoords[$i]); $j++) {
+                echo $allareacoords[$i][$j].",";
+            }
+            ?>"
+            alt="<?php echo "$areanames[$i]"; ?>" title="<?php echo "$areanames[$i]"; ?>"
+            class="area">
+            <?php
+        }
+        ?>
+    </map>
 
     <p id="msg"></p>
 </body>
