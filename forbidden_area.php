@@ -78,7 +78,7 @@ if(mysqli_num_rows($result) > 0){
                 echo $allareacoords[$i][$j].",";
             }
             ?>"
-            alt="<?php echo "$areanames[$i]"; ?>" title="<?php echo "$areanames[$i]"; ?>"
+            alt="<?php echo "$areanames[$i]"; ?>" title="Remove <?php echo "$areanames[$i]"; ?>" href='<?php echo "./remove_forbidden_area.php?area=$areaids[$i]" ?>'
             class="area">
             <?php
         }
