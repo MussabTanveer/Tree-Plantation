@@ -45,8 +45,8 @@ require("connection.php");
 
         // display X and Y coordinates
         $(".map").mousemove(function(event){
-            var relX = event.pageX - $(this).offset().left - 8;
-            var relY = event.pageY - $(this).offset().top - 8;
+            var relX = event.pageX - $(this).offset().left;
+            var relY = event.pageY - $(this).offset().top;
             var relBoxCoords = "(" + relX + "," + relY + ")";
             $(".mouse-cords").text(relBoxCoords);
         });
@@ -56,8 +56,8 @@ require("connection.php");
             //$(".marker").remove();
             // get all user info from fields
             var coords = [];
-            coords[0] = ev.pageX - $(this).offset().left - 8;
-            coords[1] = ev.pageY - $(this).offset().top - 8;
+            coords[0] = ev.pageX - $(this).offset().left;
+            coords[1] = ev.pageY - $(this).offset().top;
             // display info on hover
             var title = "(" + coords[0] + ", " + coords[1] + ")";
             
