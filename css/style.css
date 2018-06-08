@@ -1,0 +1,24 @@
+.map {
+    width: 1280px;
+    height: 1024px;
+}
+
+.cell {
+    cursor: cell;
+}
+
+.crosshair {
+    cursor: crosshair;
+}
+
+area {
+    cursor: not-allowed;
+}
+
+.success {
+    color: green;
+}
+
+.fail {
+    color: red;
+}
