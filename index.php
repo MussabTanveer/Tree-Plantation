@@ -90,9 +90,10 @@ if(mysqli_num_rows($result) > 0){
             </div>
         </div>
         <br>
-        <!-- Toggle images -->
+        <!-- Toggle images 
         <button class="btn btn-success" id="toggle" onclick="toggle();">Show Coordinates <span class="glyphicon glyphicon-eye-open"></span></button>
         <br>
+        -->
     </div>
     <br>
     
@@ -207,6 +208,7 @@ if(mysqli_num_rows($result) > 0){
     });
     
     // Toggle map images
+    /*
     var t = 0;
     function toggle(){
         if(t == 0)
@@ -222,4 +224,5 @@ if(mysqli_num_rows($result) > 0){
             t = 0;
         }
     }
+    */
 </script>
