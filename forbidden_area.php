@@ -27,30 +27,15 @@ if(mysqli_num_rows($result) > 0){
         array_push($allareacoords, $areacoords);
     }
 }
+// HEADER
+require_once("./header.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tree Plantation</title>
-    <script src="./script/jquery/jquery-3.2.1.min.js"></script>
-    <script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script>
         if(performance.navigation.type == 2){
         location.reload(true);
         }
     </script>
-    <link rel="shortcut icon" href="./images/pine-tree.png" />
-    <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
-    <style>
-        .cell {cursor: crosshair;}
-        area {cursor: not-allowed;}
-    </style>
-</head>
-<body>
     <br>
     <div class="container">
         <form id="coordForm" method="POST" action="insert_forbidden_area.php">
@@ -66,7 +51,7 @@ if(mysqli_num_rows($result) > 0){
     <br>
     
     <!-- Image on which the forbidden area going to be marked -->
-    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" />
+    <img class="map crosshair" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" />
 
     <!-- Previously restricted area -->
     <map name="mapTree">
@@ -88,8 +73,10 @@ if(mysqli_num_rows($result) > 0){
     </map>
 
     <p id="msg"></p>
-</body>
-</html>
+<?php
+// FOOTER
+require_once("./footer.php");
+?>
 
 <script type="text/javascript">
     $(document).ready(function(){

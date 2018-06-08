@@ -13,14 +13,14 @@ $sql = "INSERT INTO tree_location (type, xcoord, ycoord, username, email) VALUES
 if(filter_var($email,FILTER_VALIDATE_EMAIL))
 {
 	if(mysqli_query($conn, $sql)){
-		//echo "<font color='green'> Congratulations! You have planted a tree. :) </font>";
+		echo "<p class='success'> Congratulations! You have planted a tree. :) </p>";
 		$message = "Congratulations, $username!\nYou have planted a $type tree.\nPlease provide your full name, residential addreess, tree named after and bank details (bank name and account number) in reply to this email.\n\nThanks!";
 		mail($email,'Tree Plantation', $message, 'From: ned.trees@gmail.com');
 	}
 	else
-		echo "<font color='red'> Tree not planted </font>";
+		echo "<p class='fail'> Tree not planted </p>";
 }
 else
-	echo "<font color='red'> Please Enter Valid Email address </font>";
+	echo "<p class='fail'> Please Enter Valid Email address </p>";
 
 ?>

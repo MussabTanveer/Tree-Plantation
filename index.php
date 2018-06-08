@@ -7,7 +7,7 @@ if(!empty($_GET['delete'])){
     $id=$_GET['delete'];
     $sql_delete="DELETE FROM tree_location WHERE id=$id";
     if(mysqli_query($conn, $sql_delete)) {
-        $delmsg = "<h3 style='color:green'>Tree has been removed!</h3><br />";
+        $delmsg = "<h3 class='success'>Tree has been removed!</h3><br />";
     }
 }
 
@@ -54,28 +54,10 @@ if(mysqli_num_rows($result) > 0){
         array_push($allareacoords, $areacoords);
     }
 }
-//print_r($areaids);echo "<br>";
-//print_r($areanames);echo "<br>";
-//print_r($allareacoords);echo "<br>";
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tree Plantation</title>
-    <script src="./script/jquery/jquery-3.2.1.min.js"></script>
-    <script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <link rel="shortcut icon" href="./images/pine-tree.png" />
-    <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css">
-    <style>
-        .cell {cursor: cell;}
-        area {cursor: not-allowed;}
-    </style>
-</head>
-<body>
+// HEADER
+require_once("./header.php");
+?>
     <br>
     <div class="container">
         <div id="infoPanel" class="form-inline">
@@ -107,7 +89,7 @@ if(mysqli_num_rows($result) > 0){
     <br>
     
     <!-- Image on which the trees are going to be placed -->
-    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" style="width:1280px; height:1024px;" />
+    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" />
     
     <!-- Restricted area -->
     <map name="mapTree">
@@ -127,8 +109,10 @@ if(mysqli_num_rows($result) > 0){
     </map>
 
     <p id="msg"></p>
-</body>
-</html>
+<?php
+// FOOTER
+require_once("./footer.php");
+?>
 
 <script type="text/javascript">
     $(document).ready(function(){
