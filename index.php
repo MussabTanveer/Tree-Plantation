@@ -2,16 +2,26 @@
 // connect to database
 require("connection.php");
 
+// delete code
+if(!empty($_GET['delete'])){
+    $id=$_GET['delete'];
+    $sql_delete="DELETE FROM tree_location WHERE id=$id";
+    if(mysqli_query($conn, $sql_delete)) {
+        $delmsg = "<h3 style='color:green'>Tree has been removed!</h3><br />";
+    }
+}
+
 // fetch all previous marked trees records and store in arrays
 $sql = "SELECT * FROM tree_location";
 
 $result = mysqli_query($conn, $sql);
-$types = array(); $oldxcoords = array(); $oldycoords = array();
+$treeids = array(); $types = array(); $oldxcoords = array(); $oldycoords = array();
 $usernames = array(); $emails = array();
 
 if(mysqli_num_rows($result) > 0){
 	while ($row = mysqli_fetch_array($result)) {
-		array_push($oldxcoords, $row["xcoord"]);
+        array_push($treeids, $row["id"]);
+        array_push($oldxcoords, $row["xcoord"]);
         array_push($oldycoords, $row["ycoord"]);
         array_push($usernames, $row["username"]);
         array_push($emails, $row["email"]);
@@ -47,7 +57,6 @@ if(mysqli_num_rows($result) > 0){
 //print_r($areaids);echo "<br>";
 //print_r($areanames);echo "<br>";
 //print_r($allareacoords);echo "<br>";
-
 ?>
 
 <!DOCTYPE html>
@@ -124,6 +133,7 @@ if(mysqli_num_rows($result) > 0){
 <script type="text/javascript">
     $(document).ready(function(){
         // display all previous marked trees
+        var treeids = <?php echo json_encode($treeids); ?>;
         var oldxcoords = <?php echo json_encode($oldxcoords); ?>;
         var oldycoords = <?php echo json_encode($oldycoords); ?>;
         var usernames = <?php echo json_encode($usernames); ?>;
@@ -145,7 +155,7 @@ if(mysqli_num_rows($result) > 0){
             oldycoords[i] = parseInt(oldycoords[i]) + $(".map").offset().top;
             oldxcoords[i] = parseInt(oldxcoords[i]) + $(".map").offset().left;
             $("body").append(
-                $('<img class="marker" src="'+src+'" />').css({
+                $('<a href="index.php?delete='+ treeids[i] +'" onClick="return confirm(\'Remove this tree?\')"><img class="marker" src="'+src+'" /></a>').css({
                 position: 'absolute',
                 top: oldycoords[i] + 'px',
                 left: oldxcoords[i] + 'px'
