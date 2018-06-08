@@ -97,7 +97,7 @@ if(mysqli_num_rows($result) > 0){
     <br>
     
     <!-- Image on which the trees are going to be placed -->
-    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" />
+    <img class="map cell" id="mapImg" src="./images/campusMap.jpg" usemap="#mapTree" style="width:1280px; height:1024px;" />
     
     <!-- Restricted area -->
     <map name="mapTree">
