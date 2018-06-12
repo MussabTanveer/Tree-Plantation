@@ -1,6 +1,7 @@
 <?php
 // connect to database
 require("connection.php");
+require_once('session.php');
 
 // fetch all previous forbidden area records and store in arrays
 $sql = "SELECT * FROM forbidden_area";
