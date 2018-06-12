@@ -1,6 +1,7 @@
 <?php
 // connect to database
 require("connection.php");
+require_once('session.php');
 
 // delete code
 if(!empty($_GET['delete'])){
@@ -58,16 +59,19 @@ if(mysqli_num_rows($result) > 0){
 // HEADER
 require_once("./header.php");
 ?>
+    <?php
+    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
+    ?>
     <br>
     <div class="container">
         <div id="infoPanel" class="form-inline">
-            <div class="input-group">
+            <div class="input-group" style="display: none;">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required/>
+                <input type="text" name="username" class="form-control" id="username" value="<?php echo $_SESSION['username']?>" placeholder="Enter username" required/>
             </div>
-            <div class="input-group">
+            <div class="input-group" style="display: none;">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required/>
+                <input type="email" name="email" class="form-control" id="email" value="<?php echo $_SESSION['email']?>" placeholder="Enter email" required/>
             </div>
             <div class="form-group">
                 <b>Select tree: </b>
@@ -109,6 +113,12 @@ require_once("./header.php");
     </map>
 
     <p id="msg"></p>
+    <?php 
+    }
+    else {
+        header('location:login.php');
+    }
+?>
 <?php
 // FOOTER
 require_once("./footer.php");
