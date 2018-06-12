@@ -1,6 +1,7 @@
 <?php
 
 require("connection.php");
+require_once('session.php');
 
 $info = $_POST["info"];
 $xcoord = $info[0];
@@ -8,8 +9,9 @@ $ycoord = $info[1];
 $username = $info[2];
 $email = $info[3];
 $type = $info[4];
+$userid = $_SESSION['id'];
 
-$sql = "INSERT INTO tree_location (type, xcoord, ycoord, username, email) VALUES('$type', $xcoord, $ycoord, '$username', '$email')";
+$sql = "INSERT INTO tree_location (type, xcoord, ycoord, userid) VALUES('$type', $xcoord, $ycoord, '$userid')";
 if(filter_var($email,FILTER_VALIDATE_EMAIL))
 {
 	if(mysqli_query($conn, $sql)){
