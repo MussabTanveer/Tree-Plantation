@@ -61,8 +61,9 @@ if(isset($_POST['submit']) && !isset($_GET['id'])){
 	
 	$user = $_POST;
 	if ($user['password'] === $user['pswdAgain']) {
-
-	$sql = "INSERT INTO user (username, email, password) VALUES ('".$user['Name']."','".$user['email']."','".$user['password']."')";
+	// Creating a hash
+	$hash = password_hash($user['password'], PASSWORD_DEFAULT, ['cost' => 12]);
+	$sql = "INSERT INTO user (username, email, password) VALUES ('".$user['Name']."','".$user['email']."','".$hash."')";
 	$message = '';
 	if ($conn->query($sql) === TRUE) {
 		header('location:login.php');
