@@ -42,7 +42,7 @@
             if(isset($_SESSION['login']) && $_SESSION['login'] == true){
             ?>
             <li><a href="./login.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            <li><a onclick="deleteAccount('<?php echo $_SESSION['username']; ?>')"><span class="glyphicon glyphicon-trash"></span> Delete account</a></li>
+            <li><a onclick="deleteAccount('<?php echo $_SESSION['username']; ?>')" style="cursor: pointer;"><span class="glyphicon glyphicon-trash"></span> Delete account</a></li>
             <?php
             }
             else {
