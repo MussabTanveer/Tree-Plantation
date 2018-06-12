@@ -3,32 +3,39 @@ require_once('connection.php');
 session_start();
 $_SESSION['login'] = false;
 if (isset($_GET['username'])) {
-  $sql = "DELETE FROM trees.user WHERE username = '". $_GET['username']."'";
+  $sql = "DELETE FROM user WHERE username = '". $_GET['username']."'";
   $result = $conn->query($sql);
 }
 if(isset($_POST['submit'])){
-	$sql = "SELECT * FROM trees.user WHERE BINARY username = BINARY '". $_POST['username']. "' AND BINARY password = BINARY '". $_POST['password']."'";
+	$sql = "SELECT * FROM user WHERE BINARY username = BINARY '". $_POST['username']. "'";
 	$result = $conn->query($sql);
 	$data = array();
 	if ($result->num_rows > 0) {
-    if ($_POST['remember']) {
-      $hour = time() + 3600;
-      setcookie("remember_me", $_POST['username'], $hour);
+    $row = $result->fetch_assoc();
+    // Verifying the password against the stored hash 
+    if (password_verify($_POST['password'], $row['password'])) {
+        //echo 'Password is valid!';
+        if ($_POST['remember']) {
+          $hour = time() + 3600;
+          setcookie("remember_me", $_POST['username'], $hour);
+        }
+        elseif (!$_POST['remember']) {
+          if(isset($_COOKIE['remember_me'])) {
+            $past = time() - 100;
+            setcookie("remember_me","",$past);
+          }
+        }
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['login'] = true;
+        header('location:index.php');
+    } else {
+        $msg = "Invalid password";
+        echo "<script type='text/javascript'>alert('$msg');</script>";
     }
-    elseif (!$_POST['remember']) {
-      if(isset($_COOKIE['remember_me'])) {
-        $past = time() - 100;
-        setcookie("remember_me","",$past);
-      }
-    }
-		$row = $result->fetch_assoc();
-    $_SESSION['id'] = $row['id'];
-    $_SESSION['username'] = $row['username'];
-    $_SESSION['email'] = $row['email'];
-		$_SESSION['login'] = true;
-		header('location:index.php');
 	} else {
-		$msg = "Invalid username or password";
+		$msg = "Invalid username";
 		echo "<script type='text/javascript'>alert('$msg');</script>";
 	}
 }
