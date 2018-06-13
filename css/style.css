@@ -22,3 +22,21 @@ area {
 .fail {
     color: red;
 }
+
+/* Bootstrap style overwrite */
+
+nav {
+    background-color: green !important;
+}
+
+.navbar-brand {
+    color: #b3ffb3 !important;
+}
+
+#myNavbar > ul > li > a {
+    color: #b3ffb3 !important;
+}
+
+#myNavbar > ul > li > a:hover {
+    color: #fff !important;
+}
