@@ -32,7 +32,6 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-            <li><a href="./index.php">Home</a></li>
             <li><a href="./index.php">Plant Tree</a></li>
             <li><a href="./forbidden_area.php">Forbidden Area</a></li>
         </ul>
